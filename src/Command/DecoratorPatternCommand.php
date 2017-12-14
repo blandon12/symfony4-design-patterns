@@ -10,6 +10,7 @@ namespace App\Command;
 
 use App\DecoratorPattern\Component\Espresso;
 use App\DecoratorPattern\Decorator\Milk;
+use App\DecoratorPattern\Decorator\Mocha;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -33,7 +34,7 @@ class DecoratorPatternCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $drink = new Milk(new Espresso());
+        $drink = new Mocha(new Milk(new Espresso()));
         echo 'My order is ' . $drink->getDescription() . ' and the price is ' . $drink->cost();
     }
 }
