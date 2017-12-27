@@ -5,9 +5,9 @@
  * Date: 27/12/2017
  * Time: 08:27
  */
-namespace App\FactoryMethodPattern\Store;
+namespace App\FactoryPattern\Store;
 
-use App\FactoryMethodPattern\Product\Pizza;
+use App\FactoryPattern\Product\Pizza;
 
 abstract class PizzaStore
 {

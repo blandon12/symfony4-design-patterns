@@ -6,16 +6,16 @@
  * Time: 08:41
  */
 
-namespace App\FactoryMethodPattern\Product;
+namespace App\FactoryPattern\Product;
 
-class EdinburghCheesePizza extends Pizza
+class EdinburghBeefPizza extends Pizza
 {
     /**
      * LondonBeefPizza constructor.
      */
     public function __construct()
     {
-        $this->name = "Edinburgh style cheese pizza";
+        $this->name = "Edinburgh style beef pizza";
         $this->dough = "Thicker crust dough";
         $this->sauce = "Plum tomato sauce";
     }
@@ -23,5 +23,10 @@ class EdinburghCheesePizza extends Pizza
     public function bake()
     {
         echo "Bake for 35 minutes at 350\n";
+    }
+
+    public function prepare()
+    {
+        // TODO: Implement prepare() method.
     }
 }

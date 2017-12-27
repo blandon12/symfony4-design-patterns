@@ -8,35 +8,37 @@
 
 namespace App\Command;
 
-use App\FactoryMethodPattern\Store\EdinburghStore;
-use App\FactoryMethodPattern\Store\LondonStore;
+use App\FactoryPattern\Store\EdinburghStore;
+use App\FactoryPattern\Store\LondonStore;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class FactoryMethodPatternCommand extends Command
+class FactoryPatternCommand extends Command
 {
     protected function configure()
     {
         $this
             // the name of the command (the part after "bin/console")
-            ->setName('app:factory-method-pattern')
+            ->setName('app:factory-pattern')
 
             // the short description shown while running "php bin/console list"
-            ->setDescription('Run command for factory method pattern.')
+            ->setDescription('Run command for factory pattern.')
 
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('This command shows how the factory method pattern works')
+            ->setHelp('This command shows how the factory pattern works')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $londonStore = new LondonStore();
-        $londonStore->orderPizza('beef');
+        $londonPizza = $londonStore->orderPizza('beef');
+        echo "You ordered a " . $londonPizza->getName() . "\n\n";
 
         $edinburghStore = new EdinburghStore();
-        $edinburghStore->orderPizza('cheese');
+        $edinburghPizza = $edinburghStore->orderPizza('cheese');
+        echo "You ordered a " . $edinburghPizza->getName() . "\n\n";
     }
 }
