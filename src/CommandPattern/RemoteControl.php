@@ -10,12 +10,15 @@ namespace App\CommandPattern;
 use App\CommandPattern\Collection\OffCommands;
 use App\CommandPattern\Collection\OnCommands;
 use App\CommandPattern\Command\Command;
+use App\CommandPattern\Command\NoCommand;
 
 class RemoteControl
 {
     private $onCommands;
 
     private $offCommands;
+
+    private $undoCommand;
 
     /**
      * RemoteControl constructor.
@@ -29,6 +32,8 @@ class RemoteControl
             $this->onCommands->addItem($i);
             $this->offCommands->addItem($i);
         }
+
+        $this->undoCommand = new NoCommand();
     }
 
     public function setCommand(int $slot, Command $onCommand, Command $offCommand)
@@ -40,14 +45,22 @@ class RemoteControl
     public function onButtonWasPushed(int $slot)
     {
         $this->onCommands->getItem($slot)->excute();
+        $this->undoCommand = $this->onCommands->getItem($slot);
     }
 
     public function offButtonWasPushed(int $slot)
     {
         $this->offCommands->getItem($slot)->excute();
+        $this->undoCommand = $this->offCommands->getItem($slot);
     }
 
-    public function print()
+    public function undoButtonWasPushed()
+    {
+        echo "undo command is for " . $this->undoCommand->getName() . "\n";
+        $this->undoCommand->undo();
+    }
+
+    public function toString()
     {
         for ($i=0; $i < 3; $i++) {
             echo "slot" . $i . ":";
@@ -57,7 +70,7 @@ class RemoteControl
             echo $this->offCommands->getItem($i)->getName();
             echo "\n";
         }
-
-        echo "\n";
+        echo $this->undoCommand->getName();
+        echo "\n\n";
     }
 }

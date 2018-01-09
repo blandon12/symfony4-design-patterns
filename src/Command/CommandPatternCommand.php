@@ -42,9 +42,11 @@ class CommandPatternCommand extends Command
 
         $remoteControl->setCommand(0, $lightOnCommand, $lightOffCommand);
 
-        $remoteControl->print();
+        $remoteControl->toString();
 
         $remoteControl->offButtonWasPushed(0);
         $remoteControl->onButtonWasPushed(0);
+
+        $remoteControl->undoButtonWasPushed();
     }
 }

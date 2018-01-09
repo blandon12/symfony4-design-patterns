@@ -12,5 +12,7 @@ abstract class Command
 {
     public abstract function excute();
 
+    public abstract function undo();
+
     public abstract function getName();
 }

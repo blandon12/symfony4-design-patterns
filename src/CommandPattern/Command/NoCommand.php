@@ -19,4 +19,9 @@ class NoCommand extends Command
     {
         return 'NoCommand';
     }
+
+    public function undo()
+    {
+        return;
+    }
 }

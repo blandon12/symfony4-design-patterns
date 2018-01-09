@@ -29,6 +29,11 @@ class LightOnCommand extends Command
         $this->light->on();
     }
 
+    public function undo()
+    {
+        $this->light->off();
+    }
+
     public function getName() {
         return "LightOnCommand";
     }
