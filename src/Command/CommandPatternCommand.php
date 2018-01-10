@@ -8,8 +8,12 @@
 
 namespace App\Command;
 
+use App\CommandPattern\Command\FanHighCommand;
+use App\CommandPattern\Command\FanLowCommand;
+use App\CommandPattern\Command\FanOffCommand;
 use App\CommandPattern\Command\LightOffCommand;
 use App\CommandPattern\Command\LightOnCommand;
+use App\CommandPattern\Receiver\Fan;
 use App\CommandPattern\Receiver\Light;
 use App\CommandPattern\RemoteControl;
 use Symfony\Component\Console\Command\Command;
@@ -46,6 +50,21 @@ class CommandPatternCommand extends Command
 
         $remoteControl->offButtonWasPushed(0);
         $remoteControl->onButtonWasPushed(0);
+
+        $remoteControl->undoButtonWasPushed();
+
+        $fanHighCommand = new FanHighCommand(new Fan('Living Room'));
+        $fanLowCommand = new FanLowCommand(new Fan('Living Room'));
+        $fanOffCommand = new FanOffCommand(new Fan('Living Room'));
+
+        $remoteControl->setCommand(1, $fanHighCommand, $fanOffCommand);
+        $remoteControl->setCommand(2, $fanLowCommand, $fanOffCommand);
+
+        $remoteControl->toString();
+
+        $remoteControl->onButtonWasPushed(2);
+        $remoteControl->offButtonWasPushed(1);
+        $remoteControl->onButtonWasPushed(1);
 
         $remoteControl->undoButtonWasPushed();
     }
